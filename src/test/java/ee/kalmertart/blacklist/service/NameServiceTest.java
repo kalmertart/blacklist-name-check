@@ -13,20 +13,20 @@ class NameServiceTest {
     private final NameService nameService = new NameService();
 
     @Test
-    void clean_noWordsToRemove_returnsOnlyGivenValue() {
+    void process_noWordsToRemove_returnsOnlyGivenValue() {
         assertThat(nameService.process("Jaanus", NOISE_WORDS))
                 .hasSize(1)
                 .contains("jaanus");
     }
 
     @Test
-    void clean_noWordsToRemoveAndHasFourWordsInName_returnsNames() {
+    void process_noWordsToRemoveAndHasFourWordsInName_returnsNames() {
         assertThat(nameService.process("Jaanus Uku, Tamm Sild", NOISE_WORDS))
                 .hasSize(24);
     }
 
     @Test
-    void clean_noWordsToRemove_returnsAllExpectedPermutationsOfNames() {
+    void process_noWordsToRemove_returnsAllExpectedPermutationsOfNames() {
         assertThat(nameService.process("Jaanus Uku Tamm", NOISE_WORDS))
                 .hasSize(6)
                 .contains("jaanus uku tamm")
@@ -38,14 +38,14 @@ class NameServiceTest {
     }
 
     @Test
-    void clean_noWordsToRemoveAndFirstNameEqualsToLastName_returnsOnlyGivenValue() {
+    void process_noWordsToRemoveAndFirstNameEqualsToLastName_returnsOnlyGivenValue() {
         assertThat(nameService.process("Jaanus Jaanus", NOISE_WORDS))
                 .hasSize(1)
                 .contains("jaanus jaanus");
     }
 
     @Test
-    void clean_removesNoiseWords_returnsPermutationOfNames() {
+    void process_removesNoiseWords_returnsPermutationOfNames() {
         assertThat(nameService.process("Sir. Jaanus", NOISE_WORDS))
                 .hasSize(3)
                 .contains("jaanus")
@@ -54,7 +54,7 @@ class NameServiceTest {
     }
 
     @Test
-    void clean_removesNoiseWord_returnsBothNames() {
+    void process_removesNoiseWord_returnsBothNames() {
         assertThat(nameService.process("Anton", NOISE_WORDS))
                 .hasSize(2)
                 .contains("anton")
@@ -62,7 +62,7 @@ class NameServiceTest {
     }
 
     @Test
-    void clean_nameOnlyContainsNoiseWords_returnsUncleanName() {
+    void process_nameOnlyContainsNoiseWords_returnsUncleanName() {
         assertThat(nameService.process("Totosir", NOISE_WORDS))
                 .hasSize(1)
                 .contains("totosir");
